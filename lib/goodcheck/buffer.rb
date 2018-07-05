@@ -1,5 +1,6 @@
 module Goodcheck
   class Buffer
+    # @dynamic path, content
     attr_reader :path
     attr_reader :content
 
@@ -30,7 +31,7 @@ module Goodcheck
       end
 
       if line_index
-        [line_index + 1, position - line_starts[line_index].begin]
+        _ = [line_index + 1, position - line_starts[line_index].begin]
       end
     end
 

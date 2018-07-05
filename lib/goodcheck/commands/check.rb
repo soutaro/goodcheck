@@ -1,6 +1,7 @@
 module Goodcheck
   module Commands
     class Check
+      # @dynamic config_path, rules, targets, reporter, stderr
       attr_reader :config_path
       attr_reader :rules
       attr_reader :targets
@@ -72,13 +73,15 @@ module Goodcheck
         end
       end
 
-      def each_file(path, immediate: false, &block)
+      def each_file(path, immediate: false)
         case
         when path.symlink?
           # noop
         when path.directory?
           path.children.each do |child|
-            each_file(child, &block)
+            each_file(child) do |path|
+              yield path
+            end
           end
         when path.file?
           if path == config_path

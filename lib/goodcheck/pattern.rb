@@ -1,5 +1,6 @@
 module Goodcheck
   class Pattern
+    # @dynamic source, regexp
     attr_reader :source
     attr_reader :regexp
 
@@ -9,7 +10,7 @@ module Goodcheck
     end
 
     def self.literal(literal, case_sensitive:)
-      new(source: literal, regexp: Regexp.compile(Regexp.escape(literal), !case_sensitive))
+      Pattern.new(source: literal, regexp: Regexp.compile(Regexp.escape(literal), !case_sensitive))
     end
 
     def self.regexp(regexp, case_sensitive:, multiline:)
@@ -17,11 +18,11 @@ module Goodcheck
       options |= Regexp::IGNORECASE unless case_sensitive
       options |= Regexp::MULTILINE if multiline
 
-      new(source: regexp, regexp: Regexp.compile(regexp, options))
+      Pattern.new(source: regexp, regexp: Regexp.compile(regexp, options))
     end
 
     def self.token(tokens, case_sensitive:)
-      new(source: tokens, regexp: compile_tokens(tokens, case_sensitive: case_sensitive))
+      Pattern.new(source: tokens, regexp: compile_tokens(tokens, case_sensitive: case_sensitive))
     end
 
     def self.compile_tokens(source, case_sensitive:)

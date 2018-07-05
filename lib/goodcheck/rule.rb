@@ -1,5 +1,6 @@
 module Goodcheck
   class Rule
+    # @dynamic id, patterns, message, justifications, globs, passes, fails
     attr_reader :id
     attr_reader :patterns
     attr_reader :message

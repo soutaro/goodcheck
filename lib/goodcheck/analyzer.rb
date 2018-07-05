@@ -1,5 +1,7 @@
 module Goodcheck
   class Analyzer
+    # @dynamic rule, buffer
+
     attr_reader :rule
     attr_reader :buffer
 
@@ -8,7 +10,7 @@ module Goodcheck
       @buffer = buffer
     end
 
-    def scan(&block)
+    def scan
       if block_given?
         issues = []
 
@@ -37,9 +39,11 @@ module Goodcheck
           end
         end
 
-        issues.each(&block)
+        issues.each do |issue|
+          yield issue
+        end
       else
-        enum_for(:scan, &block)
+        enum_for :scan
       end
     end
   end

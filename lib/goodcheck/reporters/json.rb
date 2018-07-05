@@ -1,6 +1,7 @@
 module Goodcheck
   module Reporters
     class JSON
+      # @dynamic stdout, stderr, issues
       attr_reader :stdout
       attr_reader :stderr
       attr_reader :issues

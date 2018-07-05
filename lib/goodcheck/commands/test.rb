@@ -3,6 +3,7 @@ module Goodcheck
     class Test
       include ConfigLoading
 
+      # @dynamic stdout, stderr, config_path
       attr_reader :stdout
       attr_reader :stderr
       attr_reader :config_path
@@ -27,7 +28,7 @@ module Goodcheck
 
         duplicated_ids = []
 
-        config.rules.group_by(&:id).each do |id, rules|
+        config.rules.group_by {|x| x.id }.each do |id, rules|
           if rules.size > 1
             duplicated_ids << id
           end
@@ -88,7 +89,7 @@ module Goodcheck
       def rule_matches_example?(rule, example)
         buffer = Buffer.new(path: Pathname("-"), content: example)
         analyzer = Analyzer.new(rule: rule, buffer: buffer)
-        analyzer.scan.count > 0
+        analyzer.scan.any?
       end
     end
   end

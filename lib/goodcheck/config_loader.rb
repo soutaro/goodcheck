@@ -4,7 +4,7 @@ module Goodcheck
 
     class InvalidPattern < StandardError; end
 
-    Schema = StrongJSON.new do
+    Schema = _ = StrongJSON.new do
       let :deprecated_regexp_pattern, object(regexp: string, case_insensitive: boolean?, multiline: boolean?)
       let :deprecated_literal_pattern, object(literal: string, case_insensitive: boolean?)
       let :deprecated_token_pattern, object(token: string, case_insensitive: boolean?)
@@ -35,6 +35,7 @@ module Goodcheck
       let :config, object(rules: rules)
     end
 
+    # @dynamic path, content, stderr, printed_warnings
     attr_reader :path
     attr_reader :content
     attr_reader :stderr
@@ -44,7 +45,7 @@ module Goodcheck
       @path = path
       @content = content
       @stderr = stderr
-      @printed_warnings = Set.new
+      @printed_warnings = _ = Set.new
     end
 
     def load

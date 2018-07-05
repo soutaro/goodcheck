@@ -1,6 +1,7 @@
 module Goodcheck
   module Commands
     module ConfigLoading
+      # @dynamic config
       attr_reader :config
 
       def load_config!

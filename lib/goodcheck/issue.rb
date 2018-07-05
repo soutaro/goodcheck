@@ -1,5 +1,6 @@
 module Goodcheck
   class Issue
+    # @dynamic buffer, range, rule, text
     attr_reader :buffer
     attr_reader :range
     attr_reader :rule

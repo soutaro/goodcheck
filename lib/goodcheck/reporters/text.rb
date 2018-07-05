@@ -1,6 +1,7 @@
 module Goodcheck
   module Reporters
     class Text
+      # @dynamic stdout
       attr_reader :stdout
 
       def initialize(stdout:)
@@ -27,7 +28,7 @@ module Goodcheck
                        line.bytesize
                      end
         colored_line = line.byteslice(0, issue.location.start_column) + Rainbow(line.byteslice(issue.location.start_column, end_column - issue.location.start_column)).red + line.byteslice(end_column, line.bytesize - end_column)
-        stdout.puts "#{issue.path}:#{issue.location.start_line}:#{colored_line}:\t#{issue.rule.message.lines.first.chomp}"
+        stdout.puts "#{issue.path}:#{issue.location.start_line}:#{colored_line}:\t#{issue.rule.message.lines[0].chomp}"
       end
     end
   end

@@ -17,6 +17,7 @@ rules:
       - Signup via GitHub
       EOC
 
+      # @dynamic stdout, stderr, path, force
       attr_reader :stdout
       attr_reader :stderr
       attr_reader :path

@@ -1,5 +1,6 @@
 module Goodcheck
   class Location
+    # @dynamic start_line, start_column, end_line, end_column
     attr_reader :start_line
     attr_reader :start_column
     attr_reader :end_line

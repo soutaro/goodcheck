@@ -2,6 +2,8 @@ require "optparse"
 
 module Goodcheck
   class CLI
+    # @dynamic stdout, stderr
+    #
     attr_reader :stdout
     attr_reader :stderr
 
@@ -20,7 +22,8 @@ module Goodcheck
 
 
     def run(args)
-      command = args.shift&.to_sym
+      # @type var command: Symbol
+      command = _ = args.shift&.to_sym
 
       if COMMANDS.key?(command)
         __send__(command, args)
@@ -59,6 +62,7 @@ module Goodcheck
         targets.push *args.map {|arg| Pathname(arg) }
       end
 
+      # @type var reporter: _Reporter
       reporter = case format
                  when "text", nil
                    Reporters::Text.new(stdout: stdout)
